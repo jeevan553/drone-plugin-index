@@ -1,0 +1,94 @@
+title: Test Results Analysis
+author: harness
+tags:
+  - testing
+  - reporting
+  - influxdb
+logo: test_results_logo.svg
+repo: https://github.com/harness/drone-test-analysis
+image: https://hub.docker.com/r/plugins/test-analysis
+license: Blue Oak Model License 1.0.0
+readme: https://github.com/harness/drone-test-analysis/blob/main/README.md
+description: |
+  A plugin for analyzing test results and storing them in InfluxDB.
+
+example: |
+  kind: pipeline
+  name: test-analysis
+
+  steps:
+    - name: test_results
+      image: plugins/drone-test-analysis
+      settings:
+        testing_framework: junit
+        group: regression
+        reports_dir: /harness/test-results
+        include_pattern: "**/standard-TEST*.xml"
+        influxdb_url: https://influxdb.example.com
+        influxdb_token: <+secrets.getValue("INFLUXDB_TOKEN")>
+        influxdb_org: my-org
+        influxdb_bucket: test-results
+        compare_build_results: true
+        compare_build_id: 12345
+
+properties:
+  testing_framework:
+    type: string
+    defaultValue: ""
+    description: The testing framework to be used (e.g., testng, nunit, junit, jacoco).
+    secret: false
+    required: true
+  group:
+    type: string
+    defaultValue: ""
+    description: A logical grouping for test results.
+    secret: false
+    required: false
+  reports_dir:
+    type: string
+    defaultValue: ""
+    description: The directory containing test result files.
+    secret: false
+    required: true
+  include_pattern:
+    type: string
+    defaultValue: ""
+    description: A pattern to match test result files (e.g., **/standard-TEST*.xml).
+    secret: false
+    required: false
+  influxdb_url:
+    type: string
+    defaultValue: ""
+    description: The URL of the InfluxDB instance.
+    secret: false
+    required: true
+  influxdb_token:
+    type: string
+    defaultValue: ""
+    description: Authentication token for InfluxDB.
+    secret: true
+    required: true
+  influxdb_org:
+    type: string
+    defaultValue: ""
+    description: The organization in InfluxDB.
+    secret: false
+    required: true
+  influxdb_bucket:
+    type: string
+    defaultValue: ""
+    description: The InfluxDB bucket for storing test results.
+    secret: false
+    required: true
+  compare_build_results:
+    type: boolean
+    defaultValue: false
+    description: Whether to compare results with previous builds. Specify true/false.
+    secret: false
+    required: false
+  compare_build_id:
+    type: string
+    defaultValue: ""
+    description: The specific build ID for comparison.
+    secret: false
+    required: false
