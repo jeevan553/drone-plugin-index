@@ -75,3 +75,117 @@ properties:
     description: links usernames and channels in the message
     secret: false
     required: false
+  drone_repo_owner:
+    type: string
+    defaultValue: ""
+    description: Owner of the repository.
+    secret: false
+    required: false
+  drone_repo_name:
+    type: string
+    defaultValue: ""
+    description: Repository name.
+    secret: false
+    required: false
+  drone_commit_sha:
+    type: string
+    defaultValue: ""
+    description: SHA of the commit.
+    secret: false
+    required: false
+  drone_commit_branch:
+    type: string
+    defaultValue: ""
+    description: The branch of the commit.
+    secret: false
+    required: false
+  drone_commit_author:
+    type: string
+    defaultValue: ""
+    description: Author of the commit.
+    secret: false
+    required: false
+  drone_commit_author_email:
+    type: string
+    defaultValue: ""
+    description: Email of the commit author.
+    secret: false
+    required: false
+  drone_commit_author_avatar:
+    type: string
+    defaultValue: ""
+    description: Avatar URL of the commit author.
+    secret: false
+    required: false
+  drone_commit_author_name:
+    type: string
+    defaultValue: ""
+    description: Name of the commit author.
+    secret: false
+    required: false
+  drone_build_number:
+    type: string
+    defaultValue: ""
+    description: Build number.
+    secret: false
+    required: false
+  drone_build_status:
+    type: string
+    defaultValue: ""
+    description: Status of the build.
+    secret: false
+    required: false
+  drone_build_link:
+    type: string
+    defaultValue: ""
+    description: Link to the build.
+    secret: false
+    required: false
+  drone_tag:
+    type: string
+    defaultValue: ""
+    description: Git tag reference.
+    secret: false
+    required: false
+  plugin_access_token:
+    type: string
+    defaultValue: ""
+    description: Access token for authentication.
+    secret: true
+    required: true
+  plugin_file_path:
+    type: string
+    defaultValue: ""
+    description: Path to the file.
+    secret: false
+    required: false
+  plugin_initial_comment:
+    type: string
+    defaultValue: ""
+    description: Initial comment for the plugin.
+    secret: false
+    required: false
+  plugin_title:
+    type: string
+    defaultValue: ""
+    description: Title for the plugin output.
+    secret: false
+    required: false
+  plugin_slack_id_of:
+    type: string
+    defaultValue: ""
+    description: Slack ID to send messages to.
+    secret: false
+    required: false
+  plugin_recent_commit_id:
+    type: string
+    defaultValue: ""
+    description: Recent commit ID for tracking.
+    secret: false
+    required: false
+  plugin_old_commit_id:
+    type: string
+    defaultValue: ""
+    description: Old commit ID for comparison.
+    secret: false
+    required: false
