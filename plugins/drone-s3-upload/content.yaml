@@ -1,0 +1,84 @@
+title: S3
+author: Harness
+tags:
+  - s3 upload
+  - publish
+logo:
+repo: https://github.com/harness-community/drone-s3-upload-publish/
+image: https://hub.docker.com/r/plugins/email
+license: Apache License 2.0
+readme: https://github.com/harness-community/drone-s3-upload-publish/blob/main/README.md
+description: The drone s3 upload plugin can be used to notify people of a build result.
+example: |
+  kind: pipeline
+  name: default
+
+  steps:
+  - name: s3-upload-publish
+    image: harnesscommunity/drone-s3-upload-publish
+    type: Plugin
+    identifier: custom_plugin
+    settings:
+      aws_access_key_id: <+pipeline.variables.AWS_ACCESS>
+      aws_secret_access_key: <+pipeline.variables.AWS_SECRET>
+      aws_default_region: ap-southeast-2
+      aws_bucket: bucket-name
+      artifact_file: url.txt
+      source: OBJECT_PATH
+      imagePullPolicy: IfNotPresent
+
+properties:
+  aws_access_key_id:
+    type: string
+    defaultValue: ""
+    description: AWS access key ID used for authentication.
+    secret: true
+    required: false
+  aws_secret_access_key:
+    type: string
+    defaultValue: ""
+    description: AWS secret access key used for authentication.
+    secret: true
+    required: false
+  aws_default_region:
+    type: string
+    defaultValue: "us-east-1"
+    description: Default AWS region for operations.
+    secret: false
+    required: false
+  aws_bucket:
+    type: string
+    defaultValue: ""
+    description: S3 bucket name to upload/download the artifact.
+    secret: false
+    required: false
+  artifact_file:
+    type: string
+    defaultValue: ""
+    description: Path to the artifact file to upload or download.
+    secret: false
+    required: false
+  source:
+    type: string
+    defaultValue: ""
+    description: Source directory or path to be used in the plugin execution.
+    secret: false
+    required: false
+  PLUGIN_TARGET:
+    type: string
+    defaultValue: ""
+    description: Target path where the artifact or result should be stored or uploaded.
+    secret: false
+    required: false
+  PLUGIN_GLOB:
+    type: string
+    defaultValue: "**/*"
+    description: Glob pattern to match files for processing or uploading.
+    secret: false
+    required: false
+  imagePullPolicy:
+    type: string
+    defaultValue: "IfNotPresent"
+    description: Image pull policy for Kubernetes or containerized environments (e.g., Always, IfNotPresent, Never).
+    secret: false
+    required: false
