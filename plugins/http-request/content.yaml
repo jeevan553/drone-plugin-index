@@ -1,0 +1,79 @@
+title: http-request
+author: Harness
+tags:
+  - http-request
+  - publish
+logo:
+repo: https://github.com/harness-community/drone-httprequest
+image: https://hub.docker.com/r/plugins/http-request
+license: Apache License 2.0
+readme: https://github.com/harness-community/drone-httprequest/blob/main/README.md
+description: The httprequest plugin in Drone facilitates the automation of HTTP requests during CI/CD pipelines. It allows the user to send HTTP/HTTPS requests to specified endpoints and perform actions based on the response, similar to the Jenkins HTTP Request Plugin. Users can set headers, authenticate requests, define expected response codes, and configure timeouts.
+example: |
+  kind: pipeline
+  name: default
+
+  steps:
+    - name: drone-httprequest
+      image: harnesscommunity/drone-httprequest
+      type: Plugin
+      identifier: custom_plugin
+      settings:
+        plugin_url: <+plugin_url_path>
+        plugin_http_method: <+plugin_http_method>
+        plugin_headers: <+plugin_headers>
+        plugin_timeout: Timeout for the HTTP request in seconds
+        plugin_output_file: File path to write the HTTP response body
+        plugin_ignore_ssl: Whether to ignore SSL certificate validation
+        plugin_proxy: Proxy server to use for the HTTP request
+        plugin_request_body: Request body to include in the HTTP call
+
+properties:
+  PLUGIN_URL:
+    type: string
+    defaultValue: ""
+    description: "The target URL to send the HTTP request to (e.g., https://api.example.com/endpoint)."
+    secret: false
+    required: true
+  PLUGIN_HTTP_METHOD:
+    type: string
+    defaultValue: "GET"
+    description: "HTTP method to use for the request (e.g., GET, POST, PUT, DELETE, PATCH)."
+    secret: false
+    required: false
+  PLUGIN_HEADERS:
+    type: array
+    defaultValue: []
+    description: "List of HTTP headers to include in the request, in 'Key: Value' format (e.g., 'Authorization: Bearer token')."
+    secret: false
+    required: false
+  PLUGIN_TIMEOUT:
+    type: number
+    defaultValue: 30
+    description: "Timeout for the HTTP request in seconds."
+    secret: false
+    required: false
+  PLUGIN_OUTPUT_FILE:
+    type: string
+    defaultValue: ""
+    description: "File path to write the HTTP response body to. Can be relative to workspace or absolute."
+    secret: false
+    required: false
+  PLUGIN_IGNORE_SSL:
+    type: boolean
+    defaultValue: false
+    description: "Whether to ignore SSL certificate validation (useful for self-signed certs in development)."
+    secret: false
+    required: false
+  PLUGIN_PROXY:
+    type: string
+    defaultValue: ""
+    description: "Proxy server to use for the HTTP request (e.g., http://proxy.example.com:8080)."
+    secret: false
+    required: false
+  PLUGIN_REQUEST_BODY:
+    type: string
+    defaultValue: ""
+    description: "Request body to include in the HTTP call (used with POST, PUT, PATCH). Can be raw text or JSON."
+    secret: false
+    required: false
